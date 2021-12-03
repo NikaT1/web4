@@ -1,36 +1,4 @@
 <template>
-  <table id="main-table">
-    <tr>
-      <td>
-        <table id="head-table">
-          <tr>
-            <td>
-              <table id="name-table" class="name-table">
-                <tr>
-                  <td>Тройникова Вероника Дмитриевна, группа Р3233</td>
-                  <td>
-                    <button class="button" id="changeColor">
-                      сменить тему
-                    </button>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <table id="variant-table" class="variant-table">
-                <tr>
-                  <td>
-                    <div id = "var" >Вариант 33333</div>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
     <tr>
       <td>
         <table id="body-table" class="body-table">
@@ -149,7 +117,7 @@
                           <table id="r-table">
                             <tr>
                             <div class="special-checkbox">
-                              <CheckboxRadio/>
+                              <CheckboxRadio></CheckboxRadio>
                             </div>
                               <td colspan="2">
                                 <button class="button" id="submit">
@@ -174,20 +142,21 @@
         </table>
       </td>
     </tr>
-  </table>
 </template>
 
 <script>
-import CheckboxRadio from './CheckboxRadio.vue'
+import CheckboxRadio from './CheckboxRadio'
 export default {
-  components: CheckboxRadio,
+  components: {
+    CheckboxRadio,
+  },
   name: 'Main',
   data(){
     return {
       param_x: "",
       param_y: "",
-      param_r: "5", // максимальный размер графика
-      dots: new Array(0), // Список всех точек пользователя
+      param_r: "5",
+      dots: new Array(0)
     }
   },
   methods: {
@@ -459,11 +428,6 @@ select {
   fill: rgba(206, 73, 229, 0.7);
 }
 
-.dark-coord {
-  stroke: rgb(255, 255, 255);
-  fill: rgb(255, 255, 255);
-}
-
 #result-td {
   width: 100%;
 }
@@ -475,20 +439,6 @@ select {
 .svg-figure-color {
   fill: rgb(234, 234, 234);
   stroke: rgb(161, 133, 171);
-}
-
-.dark-svg-line-color {
-  stroke: rgb(193, 162, 203);
-}
-
-.dark-svg-figure-color {
-  fill: rgba(79, 50, 91, 0.73);
-  stroke: rgba(186, 129, 255, 0.73);
-}
-
-.dark-svg-text {
-  stroke: rgb(214, 196, 224);
-  fill: rgb(214, 196, 224);
 }
 
 </style>
