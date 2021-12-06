@@ -1,7 +1,7 @@
 <template>
   <div>
     <td>
-      <label> <input name="rCheckBox" id="defaultBox"
+      <label> <input v-bind:name="name" class="defaultBox"
                      type="checkbox"
                      value="-5"
                      checked>
@@ -12,7 +12,7 @@
     </td>
     <td>
       <label>
-        <input name="rCheckBox" type="checkbox"
+        <input v-bind:name="name" type="checkbox"
                value="-4">
         <p>
           -4
@@ -21,7 +21,7 @@
     </td>
     <td>
       <label>
-        <input name="rCheckBox" type="checkbox"
+        <input v-bind:name="name" type="checkbox"
                value="-3">
         <p>
           -3
@@ -30,7 +30,7 @@
     </td>
     <td>
       <label>
-        <input name="rCheckBox" type="checkbox"
+        <input v-bind:name="name" type="checkbox"
                value="-2">
         <p>
           -2
@@ -39,7 +39,7 @@
     </td>
     <td>
       <label>
-        <input name="rCheckBox" type="checkbox"
+        <input v-bind:name="name" type="checkbox"
                value="-1">
         <p>
           -1
@@ -48,7 +48,7 @@
     </td>
     <td>
       <label>
-        <input name="rCheckBox" type="checkbox"
+        <input v-bind:name="name" type="checkbox"
                value="0">
         <p>
           0
@@ -57,7 +57,7 @@
     </td>
     <td>
       <label>
-        <input name="rCheckBox" type="checkbox"
+        <input v-bind:name="name" type="checkbox"
                value="1">
         <p>1
         </p>
@@ -65,7 +65,7 @@
     </td>
     <td>
       <label>
-        <input name="rCheckBox" type="checkbox"
+        <input v-bind:name="name" type="checkbox"
                value="2">
         <p>2
         </p>
@@ -73,7 +73,7 @@
     </td>
     <td>
       <label>
-        <input name="rCheckBox" type="checkbox"
+        <input v-bind:name="name" type="checkbox"
                value="3">
         <p>3
         </p>
@@ -85,10 +85,14 @@
 <script>
 export default {
   name: "CheckboxRadio",
+  props: {
+    name: String
+  },
   mounted(){
-    document.querySelectorAll('input[name="rCheckBox"]').forEach(x => x.addEventListener("change", (function () {
+    document.querySelectorAll('input').forEach(x => x.addEventListener("change", (function () {
               if (x.checked) {
-                let boxes = document.querySelectorAll('input[name="rCheckBox"]');
+                let s = 'input[name=' + this.name + ']';
+                let boxes = document.querySelectorAll(s);
                 for (let box of boxes) {
                   if (x.value != box.value) {
                     box.checked = false;
@@ -102,7 +106,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

@@ -16,7 +16,7 @@
             <table id="variant-table" class="variant-table">
               <tr>
                 <td>
-                  <div id = "var" >Вариант 33333</div>
+                  <div id = "var" >Вариант 3387</div>
                 </td>
               </tr>
             </table>

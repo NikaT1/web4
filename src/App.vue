@@ -1,18 +1,16 @@
 <template>
-  <table id="main-table">
-    <Header/>
-    <Main/>
-  </table>
+  <div id="app">
+    <router-view/>
+  </div>
 </template>
 
 <script>
-import Main from './components/Main.vue'
-import Header from "@/components/Header.vue";
 export default {
   name: 'App',
-  components: {
-    Header,
-    Main
-  }
 }
 </script>
+<style>
+body {
+  background-color: #FFEBCD;
+}
+</style>

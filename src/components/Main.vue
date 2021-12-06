@@ -1,4 +1,12 @@
 <template>
+  <table id="main-table">
+    <tr>
+      <td>
+        <table id="head-table">
+          <Header/>
+        </table>
+      </td>
+    </tr>
     <tr>
       <td>
         <table id="body-table" class="body-table">
@@ -97,18 +105,16 @@
                       <tr>
                         <td>X:</td>
                         <td>
-                          <input type="text" id="inputX" maxlength="17" autocomplete="off"
-                                 placeholder="Введите число: (-5; 5)" value="">
+                          <div class="special-checkbox">
+                            <CheckboxRadio name="xCheckBox"></CheckboxRadio>
+                          </div>
                         </td>
                       </tr>
                       <tr>
                         <td>Y:</td>
-                        <td><select size="1" id="selectY">
-                          <option value="" selected>
-                          </option>
-                          <option value="">
-                          </option>
-                        </select>
+                        <td>
+                          <input type="text" id="inputY" maxlength="17" autocomplete="off"
+                                 placeholder="Введите число: (-3; 3)" value="">
                         </td>
                       </tr>
                       <tr class="numbers">
@@ -116,16 +122,16 @@
                         <td>
                           <table id="r-table">
                             <tr>
-                            <div class="special-checkbox">
-                              <CheckboxRadio></CheckboxRadio>
-                            </div>
+                              <div class="special-checkbox">
+                                <CheckboxRadio name="rCheckBox"></CheckboxRadio>
+                              </div>
                               <td colspan="2">
-                                <button class="button" id="submit">
+                                <button class="button" id="submit" @click="submit">
                                   результат
                                 </button>
                               </td>
                               <td colspan="3">
-                                <button class="button" id="reset">
+                                <button class="button" id="reset" @click="clear">
                                   очистить
                                 </button>
                               </td>
@@ -142,16 +148,20 @@
         </table>
       </td>
     </tr>
+  </table>
 </template>
 
 <script>
+import Header from "@/components/Header";
 import CheckboxRadio from './CheckboxRadio'
+
 export default {
   components: {
     CheckboxRadio,
+    Header
   },
   name: 'Main',
-  data(){
+  data() {
     return {
       param_x: "",
       param_y: "",
@@ -160,68 +170,71 @@ export default {
     }
   },
   methods: {
-    clickOnSVG(){
-        if (this.checkR()) {
-          this.param_x = (event.offsetX - 100) / 80 * this.param_r;
-          this.param_y = (100 - event.offsetY) / 80 * this.param_r;
-          this.sendRequestWithArgs();
-        } else {
-          alert('Не выбран радиус R!');
-        }
+    clickOnSVG() {
+      if (this.checkR()) {
+        this.param_x = (event.offsetX - 100) / 80 * this.param_r;
+        this.param_y = (100 - event.offsetY) / 80 * this.param_r;
+        this.sendRequestWithArgs();
+      } else {
+        alert('Не выбран радиус R!');
+      }
     },
     sendRequestWithArgs() {
-      const requestOptions = {
+      /*const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ x: this.param_x, y: this.param_y, r: this.param_r })
       };
-      fetch("/api/user/post", requestOptions)
-          .then(() => (this.loadData()));
+      /*fetch("/api/user/post", requestOptions)
+          .then(() => (this.loadData()));*/
     },
     checkR() {
-      let boxes = document.querySelectorAll('input[name="rCheckBox"]');
+      let boxes = document.querySelectorAll('CheckboxRadio');
       for (let elem in boxes) {
-      if (boxes[elem].checked)
-      this.param_r = boxes[elem].value;
+        if (boxes[elem].checked)
+          this.param_r = boxes[elem].value;
       }
       return true;
     },
     clear() {
       document.getElementById('result-table').getElementsByTagName("tbody")[0].innerHTML = document.getElementById("result-table").rows[0].innerHTML;
-      document.getElementById("inputX").value = "";
-      document.querySelector("#inputX").classList.remove('errorY');
-      document.querySelectorAll('input[name="rCheckBox"]').forEach(x => x.checked = false);
-      document.getElementById('defaultBox').checked = true;
-      document.getElementById('selectY').selectedIndex = 0;
+      document.getElementById("inputY").value = "";
+      document.querySelector("#inputY").classList.remove('errorY');
+      document.querySelectorAll('input[name="rCheckBox"]').forEach(r => r.checked = false);
+      document.querySelectorAll('input[name="xCheckBox"]').forEach(x => x.checked = false);
+      document.querySelectorAll('.defaultBox').checked = true;
     },
     submit() {
       function checkX() {
-        let line = document.querySelector("#inputX").value;
+        let boxes = document.querySelectorAll('input[name="xCheckBox"]');
+        for (let elem in boxes) {
+          if (boxes[elem].checked)
+            this.param_x = boxes[elem].value;
+        }
+        return true;
+      }
+
+      function checkY() {
+        let line = document.querySelector("#inputY").value;
         line = line.replace(",", ".");
         let regex = /^[-]?[0-9]{1,17}([.][0-9]{1,17}|[0-9]{0,17})$/;
         let OK = regex.exec(line);
-        let x = parseFloat(line);
-        const MAX = 5;
-        const MIN = -5;
-        if (!isNaN(x) && x > MIN && x < MAX && OK) {
-          this.param_x = x;
-          document.querySelector('#inputX').classList.remove('errorY');
+        let y = parseFloat(line);
+        const MAX = 3;
+        const MIN = -3;
+        if (!isNaN(y) && y > MIN && y < MAX && OK) {
+          this.param_y = y;
+          document.querySelector('#inputY').classList.remove('errorY');
           return true;
         } else {
           return false;
         }
       }
 
-      function checkY() {
-        let select = document.getElementById('selectY');
-        this.param_y = select.options[select.selectedIndex].value;
-        return true;
-      }
-
       if (checkY() && checkX() && this.checkR()) {
         this.sendRequestWithArgs();
       } else {
-        document.querySelector('#inputX').classList.add('errorY');
+        document.querySelector('#inputY').classList.add('errorY');
       }
     }
   }
