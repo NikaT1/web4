@@ -69,27 +69,57 @@ export default {
       e.preventDefault()
       const requestOptions = {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username: this.login, password: this.password })
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({username: this.login, password: this.password})
       };
       fetch("/api/user/new-user", requestOptions)
-          .then((response) => {
-            localStorage.setItem("par", response.data);
-            this.$router.push({name: 'main-page'});
-          });
+          .then(response => {
+            if (response.ok) return response.text();
+            else {
+              let error = new Error(response.statusText);
+              error.response = response;
+              throw error
+            }
+          }).then(data => {
+        localStorage.setItem("par", data);
+        this.$router.push({name: 'main-page'});
+      }).catch((e) => {
+        localStorage.removeItem("par");
+        this.$notify({
+          group: "error",
+          title: 'Error',
+          text: e.message,
+          type: 'error'
+        });
+      });
     },
     logIn(e) {
       e.preventDefault()
       const requestOptions = {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ login: this.login, password: this.password })
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({username: this.login, password: this.password})
       };
       fetch("/api/user/user", requestOptions)
           .then(response => {
-          localStorage.setItem("par", response.data);
-          this.$router.push({name: 'main-page'});
-          });
+            if (response.ok) return response.text();
+            else {
+              let error = new Error(response.statusText);
+              error.response = response;
+              throw error
+            }
+          }).then(data => {
+        localStorage.setItem("par", data);
+        this.$router.push({name: 'main-page'});
+      }).catch((e) => {
+        localStorage.removeItem("par");
+        this.$notify({
+          group: "error",
+          title: 'Error',
+          text: e.message,
+          type: 'error'
+        });
+      });
     }
   }
 }

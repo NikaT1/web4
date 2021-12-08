@@ -17,13 +17,13 @@
                   <td>
                     <div id="svg-picture">
                       <svg id="svg" width="210" height="210" xmlns="http://www.w3.org/2000/svg" @click="clickOnSVG">
-                        <polygon points="180,100 100,140 100,100"
+                        <polygon points="100,100 100,20 180,100"
                                  class="svg-figure-color"
                                  stroke-width="2"></polygon>
-                        <polygon points="100,20 180,20 180,100 100,100"
+                        <polygon points="100,140 20,140 20,100 100,100"
                                  class="svg-figure-color"
                                  stroke-width="2"></polygon>
-                        <path d="M100,100 v-80 a80,80 0 0,0-80,80z"
+                        <path d="M100,100 v+40 a40,40 0 0,0 40,-40z"
                               class="svg-figure-color"
                               stroke-width="2"></path>
                         <line x1="100" y1="0" x2="100" y2="200" stroke-width="2"
@@ -73,28 +73,24 @@
                   <td rowspan="2" class="background" id="result-td">
                     <div id="result-div">
                       <table id="result-table" class="result-style">
+                        <thead>
                         <tr>
                           <th id="real-time" class="result-style">Текущее время</th>
-                          <th id="time" class="result-style">Время исполнения</th>
                           <th id="X" class="result-style">X</th>
                           <th id="Y" class="result-style">Y</th>
                           <th id="R" class="result-style">R</th>
                           <th id="flag" class="result-style">Результат</th>
                         </tr>
-                        <tr>
-                          <td>
-                          </td>
-                          <td>
-                          </td>
-                          <td>
-                          </td>
-                          <td>
-                          </td>
-                          <td>
-                          </td>
-                          <td>
-                          </td>
+                        </thead>
+                        <tbody>
+                        <tr v-for="point in data" :key="point">
+                          <td>{{ point.time }}</td>
+                          <td>{{ point.x }}</td>
+                          <td>{{ point.y }}</td>
+                          <td>{{ point.r }}</td>
+                          <td>{{ point.answer }}</td>
                         </tr>
+                        </tbody>
                       </table>
                     </div>
                   </td>
@@ -102,19 +98,99 @@
                 <tr>
                   <td colspan="2">
                     <table id="numbers-table" class="background">
-                      <tr>
+                      <tr class = "numbers">
                         <td>X:</td>
                         <td>
-                          <div class="special-checkbox">
-                            <CheckboxRadio name="xCheckBox"></CheckboxRadio>
-                          </div>
+                          <table id="x-table">
+                            <tr>
+                              <td>
+                                <label> <input name="xCheckbox" v-model="param_x" class="defaultBox"
+                                               type="checkbox"
+                                               value="-5"
+                                               checked>
+                                  <p>
+                                    -5
+                                  </p>
+                                </label>
+                              </td>
+                              <td>
+                                <label>
+                                  <input name="xCheckbox" v-model="param_x" type="checkbox"
+                                         value="-4">
+                                  <p>
+                                    -4
+                                  </p>
+                                </label>
+                              </td>
+                              <td>
+                                <label>
+                                  <input name="xCheckbox" v-model="param_x" type="checkbox"
+                                         value="-3">
+                                  <p>
+                                    -3
+                                  </p>
+                                </label>
+                              </td>
+                              <td>
+                                <label>
+                                  <input name="xCheckbox" v-model="param_x" type="checkbox"
+                                         value="-2">
+                                  <p>
+                                    -2
+                                  </p>
+                                </label>
+                              </td>
+                              <td>
+                                <label>
+                                  <input name="xCheckbox" v-model="param_x" type="checkbox"
+                                         value="-1">
+                                  <p>
+                                    -1
+                                  </p>
+                                </label>
+                              </td>
+                              <td>
+                                <label>
+                                  <input name="xCheckbox" v-model="param_x" type="checkbox"
+                                         value="0">
+                                  <p>
+                                    0
+                                  </p>
+                                </label>
+                              </td>
+                              <td>
+                                <label>
+                                  <input name="xCheckbox" v-model="param_x" type="checkbox"
+                                         value="1">
+                                  <p>1
+                                  </p>
+                                </label>
+                              </td>
+                              <td>
+                                <label>
+                                  <input name="xCheckbox" v-model="param_x" type="checkbox"
+                                         value="2">
+                                  <p>2
+                                  </p>
+                                </label>
+                              </td>
+                              <td>
+                                <label>
+                                  <input name="xCheckbox" v-model="param_x" type="checkbox"
+                                         value="3">
+                                  <p>3
+                                  </p>
+                                </label>
+                              </td>
+                            </tr>
+                          </table>
                         </td>
                       </tr>
                       <tr>
                         <td>Y:</td>
                         <td>
-                          <input type="text" id="inputY" maxlength="17" autocomplete="off"
-                                 placeholder="Введите число: (-3; 3)" value="">
+                          <input type="text" id="inputY" name="y" maxlength="17" autocomplete="off"
+                                 placeholder="Введите число: (-3; 3)" v-model="param_y">
                         </td>
                       </tr>
                       <tr class="numbers">
@@ -122,9 +198,85 @@
                         <td>
                           <table id="r-table">
                             <tr>
-                              <div class="special-checkbox">
-                                <CheckboxRadio name="rCheckBox"></CheckboxRadio>
-                              </div>
+                              <td>
+                                <label> <input name="rCheckbox" v-model="param_r" class="defaultBox"
+                                               type="checkbox"
+                                               value="-5"
+                                               checked>
+                                  <p>
+                                    -5
+                                  </p>
+                                </label>
+                              </td>
+                              <td>
+                                <label>
+                                  <input name="rCheckbox" v-model="param_r" type="checkbox"
+                                         value="-4">
+                                  <p>
+                                    -4
+                                  </p>
+                                </label>
+                              </td>
+                              <td>
+                                <label>
+                                  <input name="rCheckbox" v-model="param_r" type="checkbox"
+                                         value="-3">
+                                  <p>
+                                    -3
+                                  </p>
+                                </label>
+                              </td>
+                              <td>
+                                <label>
+                                  <input name="rCheckbox" v-model="param_r" type="checkbox"
+                                         value="-2">
+                                  <p>
+                                    -2
+                                  </p>
+                                </label>
+                              </td>
+                              <td>
+                                <label>
+                                  <input name="rCheckbox" v-model="param_r" type="checkbox"
+                                         value="-1">
+                                  <p>
+                                    -1
+                                  </p>
+                                </label>
+                              </td>
+                              <td>
+                                <label>
+                                  <input name="rCheckbox" v-model="param_r" type="checkbox"
+                                         value="0">
+                                  <p>
+                                    0
+                                  </p>
+                                </label>
+                              </td>
+                              <td>
+                                <label>
+                                  <input name="rCheckbox" v-model="param_r" type="checkbox"
+                                         value="1">
+                                  <p>1
+                                  </p>
+                                </label>
+                              </td>
+                              <td>
+                                <label>
+                                  <input name="rCheckbox" v-model="param_r" type="checkbox"
+                                         value="2">
+                                  <p>2
+                                  </p>
+                                </label>
+                              </td>
+                              <td>
+                                <label>
+                                  <input name="rCheckbox" v-model="param_r" type="checkbox"
+                                         value="3">
+                                  <p>3
+                                  </p>
+                                </label>
+                              </td>
                               <td colspan="2">
                                 <button class="button" id="submit" @click="submit">
                                   результат
@@ -153,20 +305,31 @@
 
 <script>
 import Header from "@/components/Header";
-import CheckboxRadio from './CheckboxRadio'
 
 export default {
   components: {
-    CheckboxRadio,
     Header
   },
   name: 'Main',
   data() {
     return {
-      param_x: "",
+      param_x: [],
       param_y: "",
-      param_r: "5",
-      dots: new Array(0)
+      param_r: [],
+      data: new Array(0)
+    }
+  },
+  watch: {
+    param_x(val) {
+      this.checkX(val);
+    },
+    param_y(val) {
+      this.checkY(val);
+    },
+    param_r(val) {
+      if (this.checkR(val)) {
+        this.drawAll();
+      }
     }
   },
   methods: {
@@ -180,63 +343,153 @@ export default {
       }
     },
     sendRequestWithArgs() {
-      /*const requestOptions = {
+      const requestOptions = {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ x: this.param_x, y: this.param_y, r: this.param_r })
+        headers: {"Content-Type": "application/json", "Authorization": "Bearer " + localStorage.getItem("par")},
+        body: JSON.stringify({"x": this.param_x[0], "y": this.param_y, "r": this.param_r[0]})
       };
-      /*fetch("/api/user/post", requestOptions)
-          .then(() => (this.loadData()));*/
+      fetch("/api/data/add-data", requestOptions)
+          .then(() => (this.loadData()));
     },
-    checkR() {
-      let boxes = document.querySelectorAll('CheckboxRadio');
-      for (let elem in boxes) {
-        if (boxes[elem].checked)
-          this.param_r = boxes[elem].value;
+    loadData() {
+      const requestOptions = {
+        method: "GET",
+        headers: {"Authorization": "Bearer " + localStorage.getItem("par")},
+      };
+      fetch("/api/data/get-data", requestOptions)
+          .then(response => {
+            if (response.ok) return response.json();
+            else {
+              let error = new Error(response.statusText);
+              error.response = response;
+              throw error
+            }
+          }).then(data => {
+        this.data = data;
+        this.drawAll();
+      }).catch((e) => {
+        this.$notify({
+          group: "error",
+          title: 'Error',
+          text: e.message,
+          type: 'error'
+        });
+      });
+    },
+    drawAll() {
+      this.deletePointsFromSVG();
+      if (this.data.length !== 0) {
+        for (let i = 0; i<this.data.length; i++) {
+          let point = this.data[i];
+          const x = point.x;
+          const y = point.y;
+          const r = point.r;
+          const ans = point.answer;
+          let flagForR;
+          let flagForColor;
+          if (!isNaN(x) && !isNaN(y)) {
+            flagForColor = ans.includes("да");
+            if (this.param_r) {
+              flagForR = (this.param_r === r);
+              this.drawPoint(x, y, this.param_r, flagForColor, flagForR);
+            } else {
+              flagForR = (1 === r);
+              this.drawPoint(x, y, 1, flagForColor, flagForR);
+            }
+          }
+        }
       }
-      return true;
+    },
+    drawPoint(x, y, r, flagForColor, flagForR) {
+      let point = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+      point.setAttribute('cx', (80 * x / r + 100).toString());
+      point.setAttribute('cy', (-80 * y / r + 100).toString());
+      point.setAttribute('r', (3).toString());
+      point.setAttribute('data-x', x);
+      point.setAttribute('data-y', y);
+      if (!flagForR) point.classList.add("old-coord");
+      else if (flagForColor)
+        point.classList.add("good-coord");
+      else point.classList.add("bad-coord");
+      document.getElementById("svg").appendChild(point);
+    },
+    deletePointsFromSVG() {
+      document.querySelectorAll(".good-coord").forEach(x => x.remove());
+      document.querySelectorAll(".bad-coord").forEach(x => x.remove());
+      document.querySelectorAll(".old-coord").forEach(x => x.remove());
     },
     clear() {
-      document.getElementById('result-table').getElementsByTagName("tbody")[0].innerHTML = document.getElementById("result-table").rows[0].innerHTML;
-      document.getElementById("inputY").value = "";
-      document.querySelector("#inputY").classList.remove('errorY');
-      document.querySelectorAll('input[name="rCheckBox"]').forEach(r => r.checked = false);
-      document.querySelectorAll('input[name="xCheckBox"]').forEach(x => x.checked = false);
-      document.querySelectorAll('.defaultBox').checked = true;
+      const requestOptions = {
+        method: "DELETE",
+        headers: {"Authorization": "Bearer " + localStorage.getItem("par")},
+      };
+      fetch("/api/data/delete", requestOptions)
+          .then(() => {
+            document.getElementById('result-table').getElementsByTagName("tbody")[0].remove();
+            document.getElementById("inputY").value = "";
+            document.querySelector("#inputY").classList.remove('errorY');
+            document.querySelectorAll('input[name="rCheckbox"]').forEach(r => r.checked = false);
+            document.querySelectorAll('input[name="xCheckbox"]').forEach(x => x.checked = false);
+            document.querySelectorAll('.defaultBox').checked = true;
+            this.deletePointsFromSVG();
+          });
+    },
+
+    checkY(y) {
+      const MAX = 3;
+      const MIN = -3;
+      if (!isNaN(y) && parseFloat(y) > MIN && parseFloat(y) < MAX) {
+        document.querySelector('#inputY').classList.remove('errorY');
+        return true;
+      } else {
+        return false;
+      }
+    },
+    checkR(r) {
+      const MAX = 3;
+      const MIN = -5;
+      return !isNaN(r) && parseFloat(r) >= MIN && parseFloat(r) <= MAX;
+    },
+    checkX(x) {
+      const MAX = 3;
+      const MIN = 0;
+      return !isNaN(x) && parseFloat(x) > MIN && parseFloat(x) <= MAX;
     },
     submit() {
-      function checkX() {
-        let boxes = document.querySelectorAll('input[name="xCheckBox"]');
-        for (let elem in boxes) {
-          if (boxes[elem].checked)
-            this.param_x = boxes[elem].value;
-        }
-        return true;
-      }
-
-      function checkY() {
-        let line = document.querySelector("#inputY").value;
-        line = line.replace(",", ".");
-        let regex = /^[-]?[0-9]{1,17}([.][0-9]{1,17}|[0-9]{0,17})$/;
-        let OK = regex.exec(line);
-        let y = parseFloat(line);
-        const MAX = 3;
-        const MIN = -3;
-        if (!isNaN(y) && y > MIN && y < MAX && OK) {
-          this.param_y = y;
-          document.querySelector('#inputY').classList.remove('errorY');
-          return true;
-        } else {
-          return false;
-        }
-      }
-
-      if (checkY() && checkX() && this.checkR()) {
-        this.sendRequestWithArgs();
-      } else {
-        document.querySelector('#inputY').classList.add('errorY');
-      }
+      //if (true) {
+      this.sendRequestWithArgs();
+      // } else {
+      //   document.querySelector('#inputY').classList.add('errorY');
+      // }
     }
+  },
+  mounted() {
+    document.querySelectorAll('input[name="xCheckbox"]').forEach(x => x.addEventListener("change", (function () {
+              if (x.checked) {
+                let boxes = document.querySelectorAll('input[name="xCheckbox"]');
+                for (let box of boxes) {
+                  if (x.value !== box.value) {
+                    box.checked = false;
+                  }
+                }
+              } else x.checked = true;
+            }
+        )
+        )
+    );
+    document.querySelectorAll('input[name="rCheckbox"]').forEach(x => x.addEventListener("change", (function () {
+              if (x.checked) {
+                let boxes = document.querySelectorAll('input[name="rCheckbox"]');
+                for (let box of boxes) {
+                  if (x.value !== box.value) {
+                    box.checked = false;
+                  }
+                }
+              } else x.checked = true;
+            }
+        )
+        )
+    );
   }
 }
 </script>
@@ -264,14 +517,24 @@ table {
   height: 80%;
 }
 
-#imagine {
-  width: 210px;
-  height: 210px;
-}
-
 input[type='radio'] {
   padding: 7%;
   margin: 7%;
+}
+
+.good-coord {
+  stroke: rgb(98, 236, 151);
+  fill: rgb(98, 236, 151);
+}
+
+.bad-coord {
+  stroke: rgb(221, 76, 122);
+  fill: rgb(221, 76, 122);
+}
+
+.old-coord {
+  stroke: rgba(206, 73, 229, 0.7);
+  fill: rgba(206, 73, 229, 0.7);
 }
 
 input[type='text'] {
@@ -279,22 +542,11 @@ input[type='text'] {
   display: inline-block;
 }
 
-#name-table {
-  width: 100%;
-  border-spacing: 7px;
-}
-
-.name-table {
-  background-color: #dab6ea;
-}
-
-.variant-table {
-  background-color: #f1d2ff;
-}
 
 #head-table {
   width: 100%;
   border-spacing: 0;
+  padding-top: 0;
 }
 
 #body-table {
@@ -311,13 +563,7 @@ input[type='text'] {
   padding: 0;
   margin: 0;
   width: 80%;
-}
-
-#variant-table {
-  width: 90%;
   font-size: 20px;
-  margin: auto;
-  border-spacing: 5px;
 }
 
 .background-with-shadow {
@@ -404,14 +650,11 @@ select {
   table-layout: fixed;
 }
 
-#r-table {
+#r-table, #x-table {
   padding: 0;
   margin: 0;
   table-layout: fixed;
-}
-
-#selectY {
-  font-family: cursive;
+  font-size: 20px;
 }
 
 ::-webkit-scrollbar {
@@ -429,16 +672,6 @@ select {
 #result-div {
   overflow-x: auto;
   height: 300px;
-}
-
-.coord {
-  stroke: rgb(122, 3, 171);
-  fill: rgb(122, 3, 171);
-}
-
-.old-coord {
-  stroke: rgba(206, 73, 229, 0.7);
-  fill: rgba(206, 73, 229, 0.7);
 }
 
 #result-td {

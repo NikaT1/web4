@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <notifications class="notify" group="error" position="top right" max="6" close-on-click width="30%"/>
     <router-view/>
   </div>
 </template>
@@ -12,5 +13,9 @@ export default {
 <style>
 body {
   background-color: #FFEBCD;
+}
+.notify{
+  font-family: cursive;
+  font-size: 26px;
 }
 </style>

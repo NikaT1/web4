@@ -4,12 +4,19 @@ import App from "@/App.vue";
 import Index from "@/components/Index";
 import Main from "@/components/Main";
 import NotFoundError from "@/components/Error";
+import Notifications from '@kyvg/vue3-notification'
 
 const routes = [
     {
         path: '/',
         name: 'index-page',
-        component: Index
+        component: Index,
+        beforeEnter: (to, from, next) =>
+        {
+            if (localStorage.getItem("par") !== null) {
+                next({name: 'main-page'})
+            } else next({name: 'auth-page'});
+        }
     },
     {
         path: '/auth',
@@ -54,4 +61,4 @@ const router = createRouter({
     routes,
 });
 
-Vue.createApp(App).use(router).mount('#app');
+Vue.createApp(App).use(router).use(Notifications).mount('#app');

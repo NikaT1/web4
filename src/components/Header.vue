@@ -32,3 +32,26 @@ export default {
   name: "Header"
 }
 </script>
+
+<style scoped>
+#name-table {
+  width: 100%;
+  border-spacing: 7px;
+}
+
+.name-table {
+  background-color: #dab6ea;
+}
+
+.variant-table {
+  background-color: #f1d2ff;
+}
+
+#variant-table {
+  width: 90%;
+  font-size: 20px;
+  margin: auto;
+  border-spacing: 5px;
+}
+
+</style>
