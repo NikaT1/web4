@@ -98,16 +98,14 @@
                 <tr>
                   <td colspan="2">
                     <table id="numbers-table" class="background">
-                      <tr class = "numbers">
+                      <tr class="numbers">
                         <td>X:</td>
                         <td>
                           <table id="x-table">
                             <tr>
                               <td>
                                 <label> <input name="xCheckbox" v-model="param_x" class="defaultBox"
-                                               type="checkbox"
-                                               value="-5"
-                                               checked>
+                                               type="checkbox" value="-5" checked :disabled="hasAdditionalX">
                                   <p>
                                     -5
                                   </p>
@@ -116,7 +114,7 @@
                               <td>
                                 <label>
                                   <input name="xCheckbox" v-model="param_x" type="checkbox"
-                                         value="-4">
+                                         value="-4" :disabled="hasAdditionalX">
                                   <p>
                                     -4
                                   </p>
@@ -125,7 +123,7 @@
                               <td>
                                 <label>
                                   <input name="xCheckbox" v-model="param_x" type="checkbox"
-                                         value="-3">
+                                         value="-3" :disabled="hasAdditionalX">
                                   <p>
                                     -3
                                   </p>
@@ -134,7 +132,7 @@
                               <td>
                                 <label>
                                   <input name="xCheckbox" v-model="param_x" type="checkbox"
-                                         value="-2">
+                                         value="-2" :disabled="hasAdditionalX">
                                   <p>
                                     -2
                                   </p>
@@ -143,7 +141,7 @@
                               <td>
                                 <label>
                                   <input name="xCheckbox" v-model="param_x" type="checkbox"
-                                         value="-1">
+                                         value="-1" :disabled="hasAdditionalX">
                                   <p>
                                     -1
                                   </p>
@@ -152,7 +150,7 @@
                               <td>
                                 <label>
                                   <input name="xCheckbox" v-model="param_x" type="checkbox"
-                                         value="0">
+                                         value="0" :disabled="hasAdditionalX">
                                   <p>
                                     0
                                   </p>
@@ -161,7 +159,7 @@
                               <td>
                                 <label>
                                   <input name="xCheckbox" v-model="param_x" type="checkbox"
-                                         value="1">
+                                         value="1" :disabled="hasAdditionalX">
                                   <p>1
                                   </p>
                                 </label>
@@ -169,7 +167,7 @@
                               <td>
                                 <label>
                                   <input name="xCheckbox" v-model="param_x" type="checkbox"
-                                         value="2">
+                                         value="2" :disabled="hasAdditionalX">
                                   <p>2
                                   </p>
                                 </label>
@@ -177,10 +175,15 @@
                               <td>
                                 <label>
                                   <input name="xCheckbox" v-model="param_x" type="checkbox"
-                                         value="3">
+                                         value="3" :disabled="hasAdditionalX">
                                   <p>3
                                   </p>
                                 </label>
+                              </td>
+                              <td colspan = "2">
+                                <button class="button" @click="undoX">
+                                  снять выделение
+                                </button>
                               </td>
                             </tr>
                           </table>
@@ -199,96 +202,91 @@
                           <table id="r-table">
                             <tr>
                               <td>
-                                <label> <input name="rCheckbox" v-model="param_r" class="defaultBox"
-                                               type="checkbox"
-                                               value="-5"
-                                               checked>
-                                  <p>
-                                    -5
-                                  </p>
+                                <label> <input name="rCheckbox" v-model="param_r" type="checkbox"
+                                               value="-5" :disabled="hasAdditionalR">
+                                  <p>-5</p>
                                 </label>
                               </td>
                               <td>
                                 <label>
                                   <input name="rCheckbox" v-model="param_r" type="checkbox"
-                                         value="-4">
-                                  <p>
-                                    -4
-                                  </p>
+                                         value="-4" :disabled="hasAdditionalR">
+                                  <p>-4</p>
                                 </label>
                               </td>
                               <td>
                                 <label>
                                   <input name="rCheckbox" v-model="param_r" type="checkbox"
-                                         value="-3">
-                                  <p>
-                                    -3
-                                  </p>
+                                         value="-3" :disabled="hasAdditionalR">
+                                  <p>-3</p>
                                 </label>
                               </td>
                               <td>
                                 <label>
                                   <input name="rCheckbox" v-model="param_r" type="checkbox"
-                                         value="-2">
-                                  <p>
-                                    -2
-                                  </p>
+                                         value="-2" :disabled="hasAdditionalR">
+                                  <p>-2</p>
                                 </label>
                               </td>
                               <td>
                                 <label>
                                   <input name="rCheckbox" v-model="param_r" type="checkbox"
-                                         value="-1">
-                                  <p>
-                                    -1
-                                  </p>
+                                         value="-1" :disabled="hasAdditionalR">
+                                  <p>-1</p>
                                 </label>
                               </td>
                               <td>
                                 <label>
                                   <input name="rCheckbox" v-model="param_r" type="checkbox"
-                                         value="0">
-                                  <p>
-                                    0
-                                  </p>
+                                         value="0" :disabled="hasAdditionalR">
+                                  <p>0</p>
+                                </label>
+                              </td>
+                              <td>
+                                <label>
+                                  <input name="rCheckbox" v-model="param_r" type="checkbox" class="defaultBox"
+                                         value="1" :disabled="hasAdditionalR">
+                                  <p>1</p>
                                 </label>
                               </td>
                               <td>
                                 <label>
                                   <input name="rCheckbox" v-model="param_r" type="checkbox"
-                                         value="1">
-                                  <p>1
-                                  </p>
+                                         value="2" :disabled="hasAdditionalR">
+                                  <p>2</p>
                                 </label>
                               </td>
                               <td>
                                 <label>
                                   <input name="rCheckbox" v-model="param_r" type="checkbox"
-                                         value="2">
-                                  <p>2
-                                  </p>
+                                         value="3" :disabled="hasAdditionalR">
+                                  <p>3</p>
                                 </label>
                               </td>
-                              <td>
-                                <label>
-                                  <input name="rCheckbox" v-model="param_r" type="checkbox"
-                                         value="3">
-                                  <p>3
-                                  </p>
-                                </label>
-                              </td>
-                              <td colspan="2">
-                                <button class="button" id="submit" @click="submit">
-                                  результат
-                                </button>
-                              </td>
-                              <td colspan="3">
-                                <button class="button" id="reset" @click="clear">
-                                  очистить
+                              <td colspan = "3" class="tr-for-buttons">
+                                <button class="button" @click="undoR">
+                                  снять выделение
                                 </button>
                               </td>
                             </tr>
                           </table>
+                        </td>
+                      </tr>
+                      <tr class="tr-for-buttons">
+                        <td colspan="2">
+                          <button class="button" @click="goBack">
+                            выйти
+                          </button>
+                        </td>
+                        <td colspan="2">
+                          <button class="button" id="submit" @click="submit">
+                            результат
+                          </button>
+                        </td>
+                        <td colspan="2">
+                          <button class="button" id="reset" @click="clear">
+                            очистить
+                          </button>
                         </td>
                       </tr>
                     </table>
@@ -313,30 +311,34 @@ export default {
   name: 'Main',
   data() {
     return {
-      param_x: [],
+      param_x: [-5],
       param_y: "",
-      param_r: [],
+      param_r: [1],
       data: new Array(0)
     }
   },
   watch: {
-    param_x(val) {
-      this.checkX(val);
-    },
-    param_y(val) {
-      this.checkY(val);
-    },
     param_r(val) {
-      if (this.checkR(val)) {
+      if (val.length > 0 && !isNaN(val[0]) && parseFloat(val[0]) > 0 && parseFloat(val[0]) <= 3) {
         this.drawAll();
       }
     }
   },
   methods: {
+    undoR(){
+      this.param_r = [];
+    },
+    undoX(){
+      this.param_x = [];
+    },
+    goBack(){
+      localStorage.removeItem("par");
+      this.$router.push({name: 'auth-page'});
+    },
     clickOnSVG() {
-      if (this.checkR()) {
-        this.param_x = (event.offsetX - 100) / 80 * this.param_r;
-        this.param_y = (100 - event.offsetY) / 80 * this.param_r;
+      if (this.checkR(this.param_r)) {
+        this.param_x[0] = (event.offsetX - 100) / 80 * this.param_r[0];
+        this.param_y = (100 - event.offsetY) / 80 * this.param_r[0];
         this.sendRequestWithArgs();
       } else {
         alert('Не выбран радиус R!');
@@ -349,7 +351,16 @@ export default {
         body: JSON.stringify({"x": this.param_x[0], "y": this.param_y, "r": this.param_r[0]})
       };
       fetch("/api/data/add-data", requestOptions)
-          .then(() => (this.loadData()));
+      .then(response => {
+        if (response.ok) return response;
+        else {
+          let error = new Error(response.statusText);
+          error.response = response;
+          throw error
+        }
+      }).then(() => (this.loadData())).catch((e) => {
+            this.showError(e.response);
+          });
     },
     loadData() {
       const requestOptions = {
@@ -368,18 +379,13 @@ export default {
         this.data = data;
         this.drawAll();
       }).catch((e) => {
-        this.$notify({
-          group: "error",
-          title: 'Error',
-          text: e.message,
-          type: 'error'
-        });
+        this.showError(e.response);
       });
     },
     drawAll() {
       this.deletePointsFromSVG();
       if (this.data.length !== 0) {
-        for (let i = 0; i<this.data.length; i++) {
+        for (let i = 0; i < this.data.length; i++) {
           let point = this.data[i];
           const x = point.x;
           const y = point.y;
@@ -389,11 +395,11 @@ export default {
           let flagForColor;
           if (!isNaN(x) && !isNaN(y)) {
             flagForColor = ans.includes("да");
-            if (this.param_r) {
-              flagForR = (this.param_r === r);
-              this.drawPoint(x, y, this.param_r, flagForColor, flagForR);
+            if (this.param_r.length > 0) {
+              flagForR = (this.param_r[0] == r);
+              this.drawPoint(x, y, this.param_r[0], flagForColor, flagForR);
             } else {
-              flagForR = (1 === r);
+              flagForR = (1 == r);
               this.drawPoint(x, y, 1, flagForColor, flagForR);
             }
           }
@@ -425,12 +431,13 @@ export default {
       };
       fetch("/api/data/delete", requestOptions)
           .then(() => {
-            document.getElementById('result-table').getElementsByTagName("tbody")[0].remove();
+            //document.getElementById('result-table').getElementsByTagName("tbody")[0].remove();
+            this.data = [];
             document.getElementById("inputY").value = "";
             document.querySelector("#inputY").classList.remove('errorY');
             document.querySelectorAll('input[name="rCheckbox"]').forEach(r => r.checked = false);
             document.querySelectorAll('input[name="xCheckbox"]').forEach(x => x.checked = false);
-            document.querySelectorAll('.defaultBox').checked = true;
+            document.querySelectorAll('.defaultBox').forEach(x => x.checked = true);
             this.deletePointsFromSVG();
           });
     },
@@ -442,54 +449,57 @@ export default {
         document.querySelector('#inputY').classList.remove('errorY');
         return true;
       } else {
+        document.querySelector('#inputY').classList.add('errorY');
+        this.showError("Y должен быть в пределах (-3; 3)")
         return false;
       }
     },
+
     checkR(r) {
       const MAX = 3;
-      const MIN = -5;
-      return !isNaN(r) && parseFloat(r) >= MIN && parseFloat(r) <= MAX;
+      const MIN = 0;
+      if (r.length > 0 && !isNaN(r[0]) && parseFloat(r[0]) > MIN && parseFloat(r[0]) <= MAX)
+        return true;
+      else {
+        this.showError("R должен быть выбран и находиться в пределах (0;3]")
+        return false;
+      }
     },
     checkX(x) {
       const MAX = 3;
-      const MIN = 0;
-      return !isNaN(x) && parseFloat(x) > MIN && parseFloat(x) <= MAX;
+      const MIN = -5;
+      if (x.length > 0 && !isNaN(x[0]) && parseFloat(x[0]) >= MIN && parseFloat(x[0]) <= MAX)
+        return true;
+      else {
+        this.showError("X должен быть выбран и находиться в пределах [-5;3]")
+        return false;
+      }
     },
     submit() {
-      //if (true) {
-      this.sendRequestWithArgs();
-      // } else {
-      //   document.querySelector('#inputY').classList.add('errorY');
-      // }
+      if (this.checkX(this.param_x) && this.checkY(this.param_y) && this.checkR(this.param_r)) this.sendRequestWithArgs();
+    },
+    showError(text){
+      this.$notify({
+        group: "error",
+        title: 'Error',
+        text: text,
+        type: 'error'
+      });
+    }
+  },
+  computed: {
+    hasAdditionalR() {
+      return this.param_r.length > 0
+    },
+    hasAdditionalX() {
+      return this.param_x.length > 0
     }
   },
   mounted() {
-    document.querySelectorAll('input[name="xCheckbox"]').forEach(x => x.addEventListener("change", (function () {
-              if (x.checked) {
-                let boxes = document.querySelectorAll('input[name="xCheckbox"]');
-                for (let box of boxes) {
-                  if (x.value !== box.value) {
-                    box.checked = false;
-                  }
-                }
-              } else x.checked = true;
-            }
-        )
-        )
-    );
-    document.querySelectorAll('input[name="rCheckbox"]').forEach(x => x.addEventListener("change", (function () {
-              if (x.checked) {
-                let boxes = document.querySelectorAll('input[name="rCheckbox"]');
-                for (let box of boxes) {
-                  if (x.value !== box.value) {
-                    box.checked = false;
-                  }
-                }
-              } else x.checked = true;
-            }
-        )
-        )
-    );
+    document.querySelectorAll('.defaultBox').forEach(x => {
+      x.checked = true;
+    });
+    this.loadData();
   }
 }
 </script>
@@ -542,6 +552,9 @@ input[type='text'] {
   display: inline-block;
 }
 
+.tr-for-buttons{
+  text-align: left;
+}
 
 #head-table {
   width: 100%;
