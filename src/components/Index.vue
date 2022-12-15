@@ -1,112 +1,76 @@
 <template>
-  <table id="main-table">
-    <tr>
-      <td>
-        <table id="head-table">
-          <Header/>
-        </table>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <table id="body-table" class="body-table">
-          <tr class="background" id="background-tr">
-            <td>
-              <table>
-                <tr>
-                  <td colspan="3" class="title">
-                    <h2>Вход в аккаунт</h2>
-                  </td>
-                </tr>
-                <td>Логин:</td>
-                <td>
-                  <input type="text" id="loginInput" maxlength="17" autocomplete="off"
-                         placeholder="Введите логин" v-model.trim="login">
-                </td>
-                <tr>
-                  <td>Пароль:</td>
-                  <td>
-                    <input type="password" id="password" maxlength="17" autocomplete="off"
-                           placeholder="Введите пароль" v-model.trim="password">
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                    <button class="button" id="logIn" @click="logIn">
-                      Войти
-                    </button>
-                  </td>
-                  <td colspan="3">
-                    <button class="button" id="createUser" @click="createUser">
-                      Создать аккаунт
-                    </button>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
+
+  <div class="main-background" id="main-div">
+    <Header/>
+    <div class="div-block">
+      <TextBlock v-if="info" v-on:click="start($event)" button_msg="Начать">
+        Скрипт определяет попадание точки на координатной плоскости в заданную область. <br><br>
+        Параметр R и координаты точки задаются с помощью полей ввода или графика. Итоговая таблица содержит полученные
+        параметры и результат вычислений - факт попадания или непопадания точки в область.
+      </TextBlock>
+      <AccountBlock v-if="account" v-model:login="login" v-model:password="password"
+                    v-on:createUser="createUser($event)"
+                    v-on:logIn="logIn($event)"/>
+    </div>
+  </div>
+  <Footer/>
 </template>
 
 <script>
-import Header from "@/components/Header";
+import Header from "@/components/pcomponents/Header";
+import TextBlock from "@/components/pcomponents/TextBlock";
+import AccountBlock from "@/components/pcomponents/AccountBlock";
+import Footer from "@/components/pcomponents/Footer";
+
 export default {
   components: {
+    Footer,
     Header,
+    TextBlock,
+    AccountBlock,
   },
   name: "Index",
-  data(){
-    return{
+  data() {
+    return {
       login: "",
-      password: ""
+      password: "",
+      account: false,
+      info: true,
     }
   },
+  beforeMount() {
+    localStorage.removeItem('par');
+  },
   methods: {
-    createUser(e) {
-      e.preventDefault()
+    createUser() {
       const requestOptions = {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({username: this.login, password: this.password})
       };
-      fetch("/api/user/new-user", requestOptions)
-          .then(response => {
-            if (response.ok) return response.text();
-            else {
-              let error = new Error(response.statusText);
-              error.response = response;
-              throw error
-            }
-          }).then(data => {
-        localStorage.setItem("par", data);
-        this.$router.push({name: 'main-page'});
-      }).catch((e) => {
-        localStorage.removeItem("par");
-        this.$notify({
-          group: "error",
-          title: 'Error',
-          text: e.message,
-          type: 'error'
-        });
-      });
+      this.sendRequest(requestOptions, "/api/user/new-user");
+
     },
-    logIn(e) {
-      e.preventDefault()
+    logIn() {
       const requestOptions = {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({username: this.login, password: this.password})
       };
-      fetch("/api/user/user", requestOptions)
+      this.sendRequest(requestOptions, "/api/user/check-user");
+    },
+    start() {
+      this.account = true
+      this.info = false
+    },
+    sendRequest(requestOptions, addr) {
+      fetch(addr, requestOptions)
           .then(response => {
             if (response.ok) return response.text();
             else {
-              let error = new Error(response.statusText);
-              error.response = response;
-              throw error
+              return response.text().then(text => {
+                throw new Error(text)
+              });
             }
           }).then(data => {
         localStorage.setItem("par", data);
@@ -114,8 +78,8 @@ export default {
       }).catch((e) => {
         localStorage.removeItem("par");
         this.$notify({
-          group: "error",
-          title: 'Error',
+          group: 'error',
+          title: 'Ошибка',
           text: e.message,
           type: 'error'
         });
@@ -126,20 +90,29 @@ export default {
 </script>
 
 <style scoped>
-input[type='password'] {
-  font-family: cursive;
-  display: inline-block;
+
+#main-div {
+  min-width: 100%;
+  min-height: 100%;
+  position: relative;
 }
 
-#body-table{
-  height: 40%;
+.div-block {
+  display: block;
+  margin: 10% 0 0 0;
 }
 
-#main-table{
-  width: 100%;
+@media (max-width: 1228px) {
+  * {
+    font-size: 20px;
+    padding: 6px;
+  }
 }
 
-.title {
-  text-align: center;
+@media (max-width: 892px) {
+  * {
+    font-size: 16px;
+    padding: 4px;
+  }
 }
 </style>

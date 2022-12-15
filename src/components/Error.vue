@@ -1,58 +1,63 @@
 <template>
-  <div class="div_class">
-    <img id="imagine" class="background-with-shadow" src="../images/pic1.png" alt="Милый хомячок">
+  <div id="main-div" class="main-background">
+    <div class="div-block">
+      <img id="error-img" src="../assets/error-img.png" alt="Error image"/>
+    </div>
+    <div class="div-block">
+      <TextBlock button_msg="На главную" v-on:click="goToStart">
+        Что-то пошло не так... Вернитесь, пожалуйста, на стартовую страницу
+      </TextBlock>
+    </div>
   </div>
 </template>
 
 <script>
+import TextBlock from "@/components/pcomponents/TextBlock";
+
 export default {
   name: "NotFoundError",
+  components: {TextBlock},
   props: {
     errorCode: String,
-    errorMessage: String
+    errorMessage: String,
+  },
+  methods: {
+    goToStart() {
+      localStorage.removeItem("par");
+      this.$router.push({name: 'auth-page'});
+    },
   }
 }
+
 </script>
 
 <style scoped>
-body {
-  color: #6d747f;
-  font-size: 26px;
-  font-family: "Open Sans", cursive;
-  background-color: #FFEBCD;
+
+#error-img {
+  object-fit: contain;
+  object-position: center;
+  width: 35%;
+  height: 35%;
+  display: block;
+  margin: 0 auto;
 }
 
-.div_class {
-  width: 80%;
-  height: 80%;
-  margin: auto;
-  display: grid;
+#main-div {
+  font-size: large;
+  min-width: 100%;
+  min-height: 100%;
+  position: relative;
 }
 
-#imagine {
-  alignment: center;
-  width: 100%;
-  height: 100%;
+.div-block {
+  display: block;
+  margin: 1% 0 0 0;
 }
 
-.background-with-shadow {
-  background-image: url("../images/picture1.jpg");
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  box-shadow: 0 0 8px 8px #f1d2ff inset;
+.background, .background div {
+  margin: 0 auto;
+  padding: 10px 10px 10px 10px;
+  width: 40%;
 }
 
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(206, 91, 238, 0.49);
-}
-
-::-webkit-scrollbar-thumb {
-  box-shadow: inset 0 0 6px rgba(206, 91, 238, 0.49);
-}
 </style>
