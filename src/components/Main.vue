@@ -20,12 +20,12 @@
 </template>
 
 <script>
-import Header from "@/components/pcomponents/Header";
-import PictureGraph from "@/components/pcomponents/PictureGraph";
-import ButtonsBlock from "@/components/pcomponents/ButtonsBlock";
-import ResultTable from "@/components/pcomponents/ResultTable"
-import ArgsBlock from "@/components/pcomponents/ArgsBlock";
-import Footer from "@/components/pcomponents/Footer";
+import Header from "@/components/pcomponents/blocks/Header";
+import PictureGraph from "@/components/pcomponents/graph/PictureGraph";
+import ButtonsBlock from "@/components/pcomponents/blocks/ButtonsBlock";
+import ResultTable from "@/components/pcomponents/table/ResultTable"
+import ArgsBlock from "@/components/pcomponents/blocks/ArgsBlock";
+import Footer from "@/components/pcomponents/blocks/Footer";
 
 export default {
   components: {
@@ -102,8 +102,8 @@ export default {
       this.data = [];
       this.param_x = -5;
       this.param_r = 1;
-      document.getElementById("inputY").value = "";
-      document.querySelector("#inputY").classList.remove('errorY');
+      document.querySelector(".input-with-check").value = "";
+      document.querySelector(".input-with-check").classList.remove('error-input');
     },
     sendRequestWithData(address, requestOptions) {
       fetch(address, requestOptions)
@@ -135,18 +135,6 @@ export default {
         this.showError(e.message);
       });
     },
-    checkY(y) {
-      const MAX = 3;
-      const MIN = -3;
-      if (!isNaN(y) && parseFloat(y) > MIN && parseFloat(y) < MAX) {
-        document.querySelector('#inputY').classList.remove('errorY');
-        return true;
-      } else {
-        document.querySelector('#inputY').classList.add('errorY');
-        this.showError("Y должен быть в пределах (-3; 3)")
-        return false;
-      }
-    },
     checkR(r) {
       const MAX = 3;
       const MIN = 0;
@@ -154,6 +142,18 @@ export default {
         return true;
       else {
         this.showError("R должен быть выбран и находиться в пределах (0;3]")
+        return false;
+      }
+    },
+    checkY(y) {
+      const MAX = 3;
+      const MIN = -3;
+      if (!isNaN(y) && parseFloat(y) > MIN && parseFloat(y) < MAX) {
+        document.querySelector('.input-with-check').classList.remove('error-input');
+        return true;
+      } else {
+        document.querySelector('.input-with-check').classList.add('error-input');
+        this.showError("Y должен быть в пределах от -3 до 3");
         return false;
       }
     },
@@ -185,22 +185,11 @@ export default {
 }
 </script>
 <style>
-
-select {
-  width: 165px;
-}
-
-.errorY {
-  border-color: red;
-  background-color: rgba(234, 111, 145, 0.97);
-}
-
 #div-inline div {
   vertical-align: middle;
   margin: 20px 20px 20px;
   text-align: center;
 }
-
 
 .main-background > div:first-child {
   display: table;
@@ -225,4 +214,15 @@ select {
   padding: 1.5% 1.5% 1.5% 1.5%;
 }
 
+@media (max-width: 1228px) {
+  #div-inline div {
+    margin: 10px 10px 10px;
+  }
+}
+
+@media (max-width: 892px) {
+  #div-inline div {
+    margin: 5px 5px 5px;
+  }
+}
 </style>

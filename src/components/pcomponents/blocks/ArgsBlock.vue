@@ -6,7 +6,7 @@
     </div>
     <div>
       <p>Y:</p>
-      <InputWithCheck name="y" placeholder="Введите число: (-3; 3)"/>
+      <Input class="input-with-check" name="y" placeholder="Введите число: (-3; 3)" v-model:param="y"/>
     </div>
     <div class="background">
       <p>R:</p>
@@ -16,13 +16,13 @@
 </template>
 
 <script>
-import RadioBoxChain from "@/components/pcomponents/RadioBoxChain";
-import InputWithCheck from "@/components/pcomponents/InputWithCheck";
+import RadioBoxChain from "@/components/pcomponents/interactiveElements/RadioBoxChain";
+import Input from "@/components/pcomponents/interactiveElements/Input";
 
 export default {
   name: "ArgsBlock",
   components: {
-    InputWithCheck,
+    Input,
     RadioBoxChain,
   },
   props: ['param_x', 'param_r', 'param_y'],

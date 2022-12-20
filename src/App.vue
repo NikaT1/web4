@@ -62,28 +62,6 @@ select:-webkit-autofill:focus {
   transition: background-color 5000s ease-in-out 0s;
 }
 
-.input-field {
-  display: block;
-  width: 100%;
-  height: calc(2.25em + 2px);
-  padding: 0.375em 0.75em 0.375em 0.75em;
-  font-family: inherit;
-  font-size: 1em;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #212529;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #bdbdbd;
-  border-radius: 0.25rem;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-input::placeholder {
-  color: #212529;
-  opacity: 0.4;
-}
-
 .notify {
   font-family: New Century Schoolbook, TeX Gyre Schola, serif;
   font-size: 30px;
@@ -91,23 +69,6 @@ input::placeholder {
 
 p {
   color: #2b2b2b;
-}
-
-a {
-  text-decoration: none
-}
-
-a:link {
-  color: #ababab;
-}
-a:visited {
-  color: #ababab;
-}
-a:hover {
-  color: #fdfdfd;
-}
-a:active {
-  color: #7c7c7c;
 }
 
 ::-webkit-scrollbar {
@@ -120,6 +81,20 @@ a:active {
 
 ::-webkit-scrollbar-thumb {
   box-shadow: inset 0 0 6px rgba(101, 98, 102, 0.49);
+}
+
+@media (max-width: 1228px) {
+  * {
+    font-size: 20px;
+    padding: 6px;
+  }
+}
+
+@media (max-width: 892px) {
+  * {
+    font-size: 16px;
+    padding: 4px;
+  }
 }
 
 </style>

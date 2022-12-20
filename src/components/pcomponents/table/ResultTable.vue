@@ -88,10 +88,5 @@ table::first-line {
     border-radius: 4px;
     border-spacing: 4px;
   }
-
-  .variant-div {
-    font-size: 12px;
-    border-spacing: 3px;
-  }
 }
 </style>

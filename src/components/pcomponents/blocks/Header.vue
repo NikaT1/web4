@@ -8,15 +8,18 @@
       Группа Р3233, вариант 3387
     </div>
     <nav>
-      <a href="https://vk.com/akino_rev">ВКонтакте</a>
-      <a href="https://vk.com/some_link">Telegram</a>
+      <Link href="https://vk.com/akino_rev" name="ВКонтакте"/>
+      <Link href="https://vk.com/some_link" name="Telegram"/>
     </nav>
   </header>
 </template>
 
 <script>
+import Link from "@/components/pcomponents/interactiveElements/Link";
+
 export default {
-  name: "Header"
+  name: "Header",
+  components: {Link}
 }
 </script>
 
@@ -70,6 +73,9 @@ header nav a {
     font-size: 15px;
     border-spacing: 4px;
   }
+  header nav a {
+    font-size: medium;
+  }
 }
 
 @media (max-width: 892px) {
@@ -83,6 +89,10 @@ header nav a {
   .variant-div {
     font-size: 12px;
     border-spacing: 3px;
+  }
+
+  header nav a {
+    font-size: small;
   }
 }
 </style>

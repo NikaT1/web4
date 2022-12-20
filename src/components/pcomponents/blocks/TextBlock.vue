@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Button from "@/components/pcomponents/Button";
+import Button from "@/components/pcomponents/interactiveElements/Button";
 
 export default {
   name: "TextBlock",

@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import TextBlock from "@/components/pcomponents/TextBlock";
+import TextBlock from "@/components/pcomponents/blocks/TextBlock";
 
 export default {
   name: "NotFoundError",

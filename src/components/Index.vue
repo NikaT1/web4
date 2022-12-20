@@ -17,10 +17,10 @@
 </template>
 
 <script>
-import Header from "@/components/pcomponents/Header";
-import TextBlock from "@/components/pcomponents/TextBlock";
-import AccountBlock from "@/components/pcomponents/AccountBlock";
-import Footer from "@/components/pcomponents/Footer";
+import Header from "@/components/pcomponents/blocks/Header";
+import TextBlock from "@/components/pcomponents/blocks/TextBlock";
+import AccountBlock from "@/components/pcomponents/blocks/AccountBlock";
+import Footer from "@/components/pcomponents/blocks/Footer";
 
 export default {
   components: {
@@ -99,20 +99,6 @@ export default {
 
 .div-block {
   display: block;
-  margin: 10% 0 0 0;
-}
-
-@media (max-width: 1228px) {
-  * {
-    font-size: 20px;
-    padding: 6px;
-  }
-}
-
-@media (max-width: 892px) {
-  * {
-    font-size: 16px;
-    padding: 4px;
-  }
+  margin: 6% 0 0 0;
 }
 </style>

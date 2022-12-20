@@ -1,14 +1,8 @@
 <template>
   <svg id="svg" width="210" height="210" xmlns="http://www.w3.org/2000/svg" @click="$emit('clickOnSVG')">
-    <polygon points="100,100 100,20 180,100"
-             class="svg-figure-color"
-             stroke-width="2"></polygon>
-    <polygon points="100,140 20,140 20,100 100,100"
-             class="svg-figure-color"
-             stroke-width="2"></polygon>
-    <path d="M100,100 v+40 a40,40 0 0,0 40,-40z"
-          class="svg-figure-color"
-          stroke-width="2"></path>
+    <polygon points="100,100 100,20 180,100" class="svg-figure-color" stroke-width="2"></polygon>
+    <polygon points="100,140 20,140 20,100 100,100" class="svg-figure-color" stroke-width="2"></polygon>
+    <path d="M100,100 v+40 a40,40 0 0,0 40,-40z" class="svg-figure-color" stroke-width="2"></path>
     <line x1="100" y1="0" x2="100" y2="200" stroke-width="2"
           class="svg-line-color"></line>
     <line x1="0" y1="100" x2="200" y2="100" stroke-width="2"
@@ -37,16 +31,16 @@
           class="svg-line-color"></line>
     <line x1="200" y1="100" x2="190" y2=95 stroke-width="2"
           class="svg-line-color"></line>
-    <text x="30" y="92" font-size="15" class="svg-text">-R/2</text>
-    <text x="6" y="92" font-size="15" class="svg-text">-R</text>
-    <text x="107" y="30" font-size="15" class="svg-text">R</text>
-    <text x="107" y="70" font-size="15" class="svg-text">R/2</text>
-    <text x="110" y="10" font-size="15" class="svg-text">y</text>
-    <text x="130" y="92" font-size="15" class="svg-text">R/2</text>
-    <text x="170" y="92" font-size="15" class="svg-text">R</text>
-    <text x="190" y="92" font-size="15" class="svg-text">x</text>
-    <text x="107" y="140" font-size="15" class="svg-text">-R/2</text>
-    <text x="107" y="180" font-size="15" class="svg-text">-R</text>
+    <text x="30" y="92" class="svg-text">-R/2</text>
+    <text x="6" y="92" class="svg-text">-R</text>
+    <text x="107" y="30" class="svg-text">R</text>
+    <text x="107" y="70" class="svg-text">R/2</text>
+    <text x="110" y="10" class="svg-text">y</text>
+    <text x="130" y="92" class="svg-text">R/2</text>
+    <text x="170" y="92" class="svg-text">R</text>
+    <text x="190" y="92" class="svg-text">x</text>
+    <text x="107" y="140" class="svg-text">-R/2</text>
+    <text x="107" y="180" class="svg-text">-R</text>
   </svg>
 </template>
 
@@ -130,5 +124,17 @@ export default {
 .old-coord {
   stroke: rgba(206, 73, 229, 0.7);
   fill: rgba(206, 73, 229, 0.7);
+}
+
+@media (max-width: 1228px) {
+  .svg-text {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 892px) {
+  .svg-text {
+    font-size: 13px;
+  }
 }
 </style>

@@ -2,14 +2,16 @@
   <footer>
     <div><p>Студентческий проект по предмету <br/> веб-программировние</p></div>
     <nav>
-      <a href="https://itmo.ru/">Университет ИТМО</a>
+      <Link href="https://itmo.ru/" name="Университет ИТМО"/>
     </nav>
   </footer>
 </template>
 
 <script>
+import Link from "@/components/pcomponents/interactiveElements/Link";
 export default {
-  name: "Footer"
+  name: "Footer",
+  components: {Link}
 }
 </script>
 
